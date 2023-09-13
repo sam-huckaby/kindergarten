@@ -1,6 +1,8 @@
 'use client';
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import localFont from "next/font/local";
 
 enum GameState {
   INITIAL = "initial",
@@ -8,10 +10,14 @@ enum GameState {
   END = "end",
 };
 
-const timeLimit = 10;
+const timeLimit = 60;
+
+// Can't decide if this should be moved to a global location
+// TODO: When more assessments are added, move it somewhere better
+const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' })
 
 export default function Home() {
-
+  // Maybe store these in a DB at some point
   const words = [
     "I",
     "can",
@@ -79,6 +85,7 @@ export default function Home() {
   const [showTime, setShowTime] = useState(true);
   const [time, setTime] = useState(timeLimit);
   const [word, setWord] = useState('');
+  const [dyslexic, setDyslexic] = useState(false);
 
   useEffect(() => {
     randomize();
@@ -141,7 +148,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen p-24 h-full">
+    <main className="flex min-h-screen p-16 h-full">
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
@@ -160,11 +167,14 @@ export default function Home() {
         <div className="flex flex-col items-center justify-between grow">
           <div className="timer-container flex flex-col items-center justify-center">
             {showTime && <div className="timer text-xl text-center font-bold font-mono">{time}</div>}
-            <div className="text-gray-500 cursor-pointer" onClick={() => setShowTime(!showTime)}  >
-              {showTime ? "(hide)" : "(show)"}
+            <div className="mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
+              {showTime ? "hide" : "show"}
             </div>
           </div>
-          <div className="word text-6xl text-center font-sans font-bold">{word}</div>
+          <div className="flex flex-col items-center justify-between">
+            <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{word}</div>
+            <button className="mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
+          </div>
           <div className="flex flex-col items-center">
             <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center" onClick={nextWord}>Next</button>
           </div>
@@ -178,6 +188,11 @@ export default function Home() {
             Score: <span className="font-bold">{score}</span>
           </p>
           <button onClick={restart} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
+          <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[20px] right-[20px]" href="/">
+            <span className="bg-black h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
+            <span className="bg-black h-[3px] w-[25px]">&nbsp;</span>
+            <span className="bg-black h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
+          </Link>
         </div>
       }
     </main>
