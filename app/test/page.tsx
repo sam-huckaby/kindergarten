@@ -148,7 +148,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen p-16 h-full">
+    <main className="flex p-16 h-full">
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
