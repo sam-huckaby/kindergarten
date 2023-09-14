@@ -16,7 +16,7 @@ const timeLimit = 60;
 // TODO: When more assessments are added, move it somewhere better
 const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' })
 
-export default function Home() {
+export default function Practice() {
   // Maybe store these in a DB at some point
   const words = [
     "I",
@@ -183,7 +183,7 @@ export default function Home() {
       {
         mode === GameState.END &&
         <div className="flex flex-col items-center justify-around grow">
-          <h1 className="text-2xl">Good Job!</h1>
+          <h1 className="text-2xl">Great Job!</h1>
           <p className="text-4xl">
             Score: <span className="font-bold">{score}</span>
           </p>
