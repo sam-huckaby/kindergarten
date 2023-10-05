@@ -149,6 +149,11 @@ export default function Practice() {
 
   return (
     <main className="flex p-16 h-full">
+      <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[20px] right-[20px]" href="/">
+        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
+        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px]">&nbsp;</span>
+        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
+      </Link>
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
@@ -188,11 +193,6 @@ export default function Practice() {
             Score: <span className="font-bold">{score}</span>
           </p>
           <button onClick={restart} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
-          <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[20px] right-[20px]" href="/">
-            <span className="bg-black h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
-            <span className="bg-black h-[3px] w-[25px]">&nbsp;</span>
-            <span className="bg-black h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
-          </Link>
         </div>
       }
     </main>

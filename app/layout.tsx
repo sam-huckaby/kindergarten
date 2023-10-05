@@ -21,7 +21,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='' />
         <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
       </head>
-      <body className={`h-full ${inter.className}`}>{children}</body>
+      <body className={`h-full ${inter.className}`}>
+        {children}
+        {/*<div className="absolute bottom-[25px] left-[25px] w-[50px] h-[50px] rounded-full dark:text-black text-3xl border border-solid border-gray-800 bg-gray-200 flex flex-row items-center justify-center">=</div>*/}
+      </body>
     </html>
   )
 }
