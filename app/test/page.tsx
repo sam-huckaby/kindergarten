@@ -149,7 +149,7 @@ export default function Practice() {
 
   return (
     <main className="flex p-16 h-full">
-      <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[20px] right-[20px]" href="/">
+      <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[10px] right-[10px]" href="/">
         <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
         <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px]">&nbsp;</span>
         <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
