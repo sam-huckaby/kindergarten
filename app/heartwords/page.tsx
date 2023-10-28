@@ -14,7 +14,7 @@ const timeLimit = 60;
 
 // Can't decide if this should be moved to a global location
 // TODO: When more assessments are added, move it somewhere better
-const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' })
+const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' })
 
 export default function Practice() {
   // Maybe store these in a DB at some point

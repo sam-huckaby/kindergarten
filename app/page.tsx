@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import Link from "next/link";
 import { AssessmentTile } from "./AssessmentTile";
 
-const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' });
+const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' });
 
 export default function Home() {
 
