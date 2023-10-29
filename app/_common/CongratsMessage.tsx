@@ -3,7 +3,7 @@
 import localFont from "next/font/local";
 import { useEffect, useState } from "react";
 
-const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' });
+const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' });
 
 export const CongratsMessage = () => {
   const phrases = [
