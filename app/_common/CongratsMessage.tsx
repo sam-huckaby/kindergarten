@@ -1,7 +1,7 @@
 'use client';
 
 import localFont from "next/font/local";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' });
 
@@ -53,7 +53,7 @@ export const CongratsMessage = () => {
 
     // Update the displayed word
     setChosen(randomPhrase);
-  });
+  }, []); // This is recalculated on every render on purpose
 
   return <h1 className={`text-2xl ${openDyslexic.className}`}>{chosen}</h1>
 };
