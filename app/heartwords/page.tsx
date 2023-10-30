@@ -1,8 +1,8 @@
 'use client';
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
+import { CongratsMessage } from "@common/CongratsMessage";
 
 enum GameState {
   INITIAL = "initial",
@@ -148,12 +148,7 @@ export default function Practice() {
   };
 
   return (
-    <main className="flex p-16 h-full">
-      <Link className="flex flex-col border border-transparent hover:border-black rounded px-4 absolute top-[10px] right-[10px]" href="/">
-        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
-        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px]">&nbsp;</span>
-        <span className="bg-black dark:bg-neutral-200 h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
-      </Link>
+    <main className="flex p-16 pt-24 h-full">
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
@@ -188,7 +183,7 @@ export default function Practice() {
       {
         mode === GameState.END &&
         <div className="flex flex-col items-center justify-around grow">
-          <h1 className="text-2xl">Great Job!</h1>
+          <CongratsMessage />
           <p className="text-4xl">
             Score: <span className="font-bold">{score}</span>
           </p>

@@ -53,7 +53,7 @@ export const CongratsMessage = () => {
 
     // Update the displayed word
     setChosen(randomPhrase);
-  });
+  }, []); // This is recalculated on every render on purpose
 
   return <h1 className={`text-2xl ${openDyslexic.className}`}>{chosen}</h1>
 };
