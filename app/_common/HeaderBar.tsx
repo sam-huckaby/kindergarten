@@ -12,7 +12,6 @@ export const HeaderBar = () => {
   return <>
     <div className="fixed top-0 left-0 right-0 z-40 h-20 p-4 flex flex-row items-center justify-between bg-[#003865]">
       <Link href="/" className={`text-2xl text-neutral-200 ${openDyslexic.className}`}>HomeThink</Link>
-      {/* The link below is hidden on purpose, beause the menu is not yet built. The hidden class should be changed to flex when it is */}
       <button className="flex flex-col border border-transparent hover:border-black rounded px-4" onClick={() => setOpen(!open)}>
         <span className="bg-neutral-200 h-[3px] w-[25px] mt-4 mb-2">&nbsp;</span>
         <span className="bg-neutral-200 h-[3px] w-[25px]">&nbsp;</span>
