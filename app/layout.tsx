@@ -29,7 +29,9 @@ export default function RootLayout({
       </head>
       <body className={`h-full mb-4 ${inter.className}`}>
         <HeaderBar />
-        {children}
+        <div className="h-full">
+          {children}
+        </div>
       </body>
     </html>
   )

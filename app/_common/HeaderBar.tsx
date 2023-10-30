@@ -19,16 +19,17 @@ export const HeaderBar = () => {
         <span className="bg-neutral-200 h-[3px] w-[25px] mt-2 mb-4">&nbsp;</span>
       </button>
     </div>
-    <div className={`fixed top-0 right-0 bottom-0 left-0 z-40 bg-gray-500/50 ${open ? 'flex' : 'hidden'}`} onClick={() => setOpen(false)}>
+    <div className={`fixed top-20 right-0 bottom-0 left-0 z-40 bg-gray-500/50 ${open ? 'flex' : 'hidden'}`} onClick={() => setOpen(false)}>
       <div className={`
-          w-[300px] flex-col ${open ? 'flex' : 'hidden'} justify-between
-          fixed right-0 top-0 bottom-0 z-50
-          border-l border-solid border-black
-          bg-gray-400 text-2xl`}>
+          md:w-[300px] flex-col ${open ? 'flex' : 'hidden'} justify-between
+          fixed right-0 left-0 md:left-auto top-20 bottom-0 z-50
+          md:border-l border-solid border-black
+          bg-neutral-200`}>
         <div>
-          <Link className={`h-20 p-4 flex flex-row items-center hover:bg-gray-200/25 cursor-pointer`} href="/about">Where Am I?</Link>
+          <div className="menu-header h-20 p-4 flex flex-row items-center text-2xl font-bold">For Parents</div>
+          <Link className={`h-16 p-4 flex flex-row items-center hover:bg-gray-400/25 cursor-pointer text-xl`} href="/about">Where Am I?</Link>
         </div>
-        <Link className={`h-20 p-4 flex flex-row items-center hover:bg-gray-200/25 cursor-pointer`} href="/">Home</Link>
+        <Link className={`h-16 p-2 m-2 border border-solid border-black rounded flex flex-row items-center justify-center hover:bg-gray-400/25 cursor-pointer text-xl`} href="/">Home</Link>
       </div>
     </div>
   </>;

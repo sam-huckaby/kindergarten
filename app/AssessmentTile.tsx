@@ -78,7 +78,7 @@ export const AssessmentTile = ({ title, href, grade }: AssessmentTileProps) => {
         {grade}
       </span>
       <h1 className="text-2xl text-center mb-4">{title}</h1>
-      <Link className="p-4 rounded border border-solid border-black dark:border-neutral-200 w-full text-center" href={href}>Start</Link>
+      <Link className="p-4 rounded border border-solid border-black dark:border-neutral-200 w-full text-center hover:bg-gray-400/25" href={href}>Start</Link>
     </div>
   );
 };
