@@ -1,7 +1,7 @@
 'use client';
 
 import localFont from "next/font/local";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const openDyslexic = localFont({ src: './OpenDyslexic-Regular.otf' });
 
