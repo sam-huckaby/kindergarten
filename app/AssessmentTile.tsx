@@ -72,7 +72,7 @@ export const AssessmentTile = ({ title, href, grade }: AssessmentTileProps) => {
         absolute top-0 left-0 
         flex flex-col items-center justify-center 
         h-[50px] w-[50px] 
-        border-r border-b border-solid border-black 
+        border-r border-b border-solid border-black dark:border-neutral-200 
         font-bold text-2xl
         ${textColor} ${bgColor}`}>
         {grade}

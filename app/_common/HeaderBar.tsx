@@ -23,12 +23,12 @@ export const HeaderBar = () => {
           md:w-[300px] flex-col ${open ? 'flex' : 'hidden'} justify-between
           fixed right-0 left-0 md:left-auto top-20 bottom-0 z-50
           md:border-l border-solid border-black
-          bg-neutral-200`}>
+          bg-neutral-200 dark:bg-neutral-800`}>
         <div>
           <div className="menu-header h-20 p-4 flex flex-row items-center text-2xl font-bold">For Parents</div>
           <Link className={`h-16 p-4 flex flex-row items-center hover:bg-gray-400/25 cursor-pointer text-xl`} href="/about">Where Am I?</Link>
         </div>
-        <Link className={`h-16 p-2 m-2 border border-solid border-black rounded flex flex-row items-center justify-center hover:bg-gray-400/25 cursor-pointer text-xl`} href="/">Home</Link>
+        <Link className={`h-16 p-2 m-2 border border-solid border-black dark:border-neutral-200 rounded flex flex-row items-center justify-center hover:bg-gray-400/25 cursor-pointer text-xl`} href="/">Home</Link>
       </div>
     </div>
   </>;
