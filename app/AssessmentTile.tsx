@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const openDyslexic = localFont({ src: "../public/OpenDyslexic-Regular.otf" });
 
-type Grade = "K" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
+type Grade = "PK" | "K" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 export interface AssessmentTileProps {
   title: string;
@@ -13,6 +13,8 @@ export interface AssessmentTileProps {
 
 const gradeTextColor = (grade: Grade) => {
   switch (grade) {
+    case "PK":
+      return "bg-transparent";
     case "K":
       return "bg-red-600";
     case "1":
