@@ -14,7 +14,7 @@ export interface AssessmentTileProps {
 const gradeTextColor = (grade: Grade) => {
   switch (grade) {
     case "PK":
-      return "bg-transparent";
+      return "bg-transparent dark:text-white";
     case "K":
       return "bg-red-600";
     case "1":
