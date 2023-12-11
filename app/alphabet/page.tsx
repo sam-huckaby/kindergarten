@@ -167,20 +167,20 @@ export default function Practice() {
         </div>
         <div className="flex flex-col items-center justify-between">
           <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{alphabets[language].letters[position]}</div>
-          <div className={`word mt-4 italic text-2xl text-center font-lexend ${dyslexic ? openDyslexic.className : ''}`}>Like {alphabets[language].soundsLike[position]}</div>
+          <div className={`word p-4 mt-4 italic text-2xl text-center font-lexend ${dyslexic ? openDyslexic.className : ''}`}>Like {alphabets[language].soundsLike[position]}</div>
           {
             false && <button className="mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
           }
         </div>
         <div className="flex flex-row justify-center items-center">
-          <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center" disabled={position < 1} onClick={prevLetter}>Prev</button>
+          <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" disabled={position < 1} onClick={prevLetter}>Prev</button>
           <select value={jump} className="p-4 mx-4 rounded border border-solid border-black dark:border-white dark:bg-black" onChange={(e) => jumpToLetter(e.target.value)}>
             <option value="JUMP">Jump to</option>
             {
               alphabets[language].letters.map((letter) => <option key={letter} value={letter}>{letter}</option>)
             }
           </select>
-          <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center" disabled={position > alphabets[language].letters.length-2} onClick={nextLetter}>Next</button>
+          <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" disabled={position > alphabets[language].letters.length-2} onClick={nextLetter}>Next</button>
         </div>
       </div>
     </main>
