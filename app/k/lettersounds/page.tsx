@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import { CongratsMessage } from "@common/CongratsMessage";
@@ -19,64 +20,32 @@ const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' })
 export default function Practice() {
   // Maybe store these in a DB at some point
   const words = [
-    "I",
-    "can",
-    "see",
     "a",
-    "the",
-    "on",
-    "like",
-    "to",
-    "is",
-    "it",
-    "big",
-    "little",
-    "my",
-    "good",
-    "yes",
-    "no",
-    "look",
-    "he",
-    "do",
-    "you",
-    "what",
-    "this",
-    "and",
-    "under",
-    "or",
-    "are",
-    "up",
-    "down",
-    "she",
-    "her",
-    "make",
-    "they",
-    "where",
-    "with",
-    "we",
-    "play",
-    "one",
-    "have",
-    "go",
-    "hurt",
-    "day",
-    "of",
-    "said",
-    "that",
-    "there",
-    "out",
-    "all",
-    "read",
-    "for",
-    "finds",
-    "was",
-    "too",
-    "come",
-    "some",
-    "your",
-    "very",
-    "use",
-    "blue",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
   ];
 
   const [available, setAvailable] = useState(words);
@@ -84,7 +53,7 @@ export default function Practice() {
   const [score, setScore] = useState<number>(0);
   const [showTime, setShowTime] = useState(true);
   const [time, setTime] = useState(timeLimit);
-  const [word, setWord] = useState('');
+  const [letter, setLetter] = useState('');
   const [dyslexic, setDyslexic] = useState(false);
 
   useEffect(() => {
@@ -115,20 +84,19 @@ export default function Practice() {
   };
 
   const randomize = () => {
-    // Generate random index
-    const randomIndex = Math.floor(Math.random() * available.length);
+    // Select random letter
+    let randomLetter = available[Math.floor(Math.random() * available.length)];
 
-    // Select random element
-    const randomWord = available[randomIndex];
+    // Do not show the same letter twice in a row, because it is confusing
+    while (randomLetter === letter) {
+      randomLetter = available[Math.floor(Math.random() * available.length)];
+    }
 
-    available.splice(randomIndex, 1);
-    // Remove the word from the available pool of words
-    setAvailable(available);
     // Update the displayed word
-    setWord(randomWord);
+    setLetter(randomLetter);
   };
 
-  const nextWord = () => {
+  const nextLetter = () => {
     setScore(score + 1);
 
     // If all words have been read end the game
@@ -155,9 +123,9 @@ export default function Practice() {
           <div className="
             w-[50px] h-[50px]
             rounded-full animate-spin
-            border-t-8 border-t-black border-t-solid
-            border-r-8 border-r-black border-r-solid
-            border-b-8 border-b-black border-b-solid
+            border-t-8 border-t-solid border-t-black dark:border-t-neutral-200
+            border-r-8 border-r-solid border-r-black dark:border-r-neutral-200
+            border-b-8 border-b-solid border-b-black dark:border-b-neutral-200
             border-l-8 border-l-transparent border-l-solid
             ">&nbsp;</div>
         </div>
@@ -167,16 +135,16 @@ export default function Practice() {
         <div className="flex flex-col items-center justify-between grow">
           <div className="timer-container flex flex-col items-center justify-center">
             {showTime && <div className="timer text-xl text-center font-bold font-mono">{time}</div>}
-            <div className="mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
+            <div className="select-none mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
               {showTime ? "hide" : "show"}
             </div>
           </div>
           <div className="flex flex-col items-center justify-between">
-            <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{word}</div>
-            <button className="mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
+            <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{letter}</div>
+            <button className="select-none mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
           </div>
           <div className="flex flex-col items-center">
-            <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center" onClick={nextWord}>Next</button>
+            <button className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center" onClick={nextLetter}>Next</button>
           </div>
         </div>
       }
@@ -187,7 +155,7 @@ export default function Practice() {
           <p className="text-4xl">
             Score: <span className="font-bold">{score}</span>
           </p>
-          <button onClick={restart} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
+          <button onClick={restart} className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
         </div>
       }
     </main>

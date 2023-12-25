@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const openDyslexic = localFont({ src: "../public/OpenDyslexic-Regular.otf" });
 
-type Grade = "PK" | "K" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
+export type Grade = "PK" | "K" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12";
 
 export interface AssessmentTileProps {
   title: string;
@@ -79,7 +79,7 @@ export const AssessmentTile = ({ title, href, grade }: AssessmentTileProps) => {
         ${textColor} ${bgColor}`}>
         {grade}
       </span>
-      <h1 className="text-2xl text-center mb-4">{title}</h1>
+      <h1 className="text-2xl text-center mb-4 grow">{title}</h1>
       <Link className="p-4 rounded border border-solid border-black dark:border-neutral-200 w-full text-center hover:bg-gray-400/25" href={href}>Start</Link>
     </div>
   );
