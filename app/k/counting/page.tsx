@@ -131,10 +131,10 @@ export default function Practice() {
               ))}
             </div>
           </div>
-          <div className="w-full flex flex-col justify-start items-center gap-4">
+          <div className="w-full grid grid-cols-2 sm:flex sm:flex-col sm:justify-start sm:items-center gap-4">
             {
               options.map((opt: number) =>
-                <button key={opt} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" onClick={() => guess(opt)}>{opt}</button>
+                <button key={opt} className="px-4 py-12 sm:py-4 rounded border border-black dark:border-white border-solid sm:w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" onClick={() => guess(opt)}>{opt}</button>
               )
             }
           </div>
