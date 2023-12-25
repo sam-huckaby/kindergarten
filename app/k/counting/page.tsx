@@ -98,7 +98,7 @@ export default function Practice() {
   };
 
   return (
-    <main className="flex p-16 pt-28 h-full">
+    <main className="flex p-8 pt-28 h-full">
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
