@@ -7,6 +7,7 @@ export default function Home() {
       <AssessmentTile title="Alphabet Flashcards (English & Koine Greek)" href="/pk/alphabet" grade="PK" />
       <AssessmentTile title="High-Frequency Words" href="/k/heartwords" grade="K" />
       <AssessmentTile title="Letter Sound Fluency" href="/k/lettersounds" grade="K" />
+      <AssessmentTile title="Basic Counting" href="/k/counting" grade="K" />
     </main>
   )
 }
