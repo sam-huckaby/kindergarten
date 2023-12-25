@@ -167,16 +167,16 @@ export default function Practice() {
         <div className="flex flex-col items-center justify-between grow">
           <div className="timer-container flex flex-col items-center justify-center">
             {showTime && <div className="timer text-xl text-center font-bold font-mono">{time}</div>}
-            <div className="mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
+            <div className="select-none mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
               {showTime ? "hide" : "show"}
             </div>
           </div>
           <div className="flex flex-col items-center justify-between">
             <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{word}</div>
-            <button className="mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
+            <button className="select-none mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
           </div>
           <div className="flex flex-col items-center">
-            <button className="p-4 rounded border border-black dark:border-white border-solid w-full text-center" onClick={nextWord}>Next</button>
+            <button className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center" onClick={nextWord}>Next</button>
           </div>
         </div>
       }
@@ -187,7 +187,7 @@ export default function Practice() {
           <p className="text-4xl">
             Score: <span className="font-bold">{score}</span>
           </p>
-          <button onClick={restart} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
+          <button onClick={restart} className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
         </div>
       }
     </main>

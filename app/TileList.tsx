@@ -24,13 +24,15 @@ export const TileList = () => {
   };
 
   return <div className="flex flex-col justify-center items-center">
-      <select onChange={({ target: { value} }) => selectGrade(value as Grade)} className="mb-4 p-4 dark:bg-black rounded border border-solid border-black dark:border-neutral-200">
-        <option value="All">All</option>
+      <select onChange={({ target: { value} }) => selectGrade(value as Grade)} className="mb-4 p-4 bg-transparent dark:bg-black rounded border border-solid border-black dark:border-neutral-200">
+        <option className='hover:bg-red-600' value="All">All</option>
         <option value="PK">Pre-K</option>
         <option value="K">Kindergarten</option>
       </select>
+      <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       {
         tiles.filter(filterTiles).map(({title, href, grade}) => <AssessmentTile key={href} title={title} href={href} grade={grade} />)
       }
+      </div>
   </div>;
 };

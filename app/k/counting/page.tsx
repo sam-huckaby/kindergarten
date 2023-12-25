@@ -118,14 +118,14 @@ export default function Practice() {
         mode === GameState.PLAY &&
         <div className="w-full flex flex-col items-center justify-start grow">
           <div className="timer-container flex flex-row items-center justify-center gap-8">
-            <div className="text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
+            <div className="select-none text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
               {showTime ? "hide time" : "show time"}
             </div>
             {
-              showTime && <span className="timer-time">{time}</span>
+              showTime && <span className="select-none timer-time">{time}</span>
             }
             {
-              showTime && <div className="text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={toggleTime}  >
+              showTime && <div className="select-none text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={toggleTime}  >
                 {timed ? "stop" : "start"}
               </div>
             }
@@ -134,9 +134,9 @@ export default function Practice() {
             <div className="flex flex-row justify-center items-center gap-6 flex-wrap text-8xl">
               {
                 invert ?
-                  answer :
+                  <span className="select-none">{answer}</span> :
                   Array.from({ length: answer }).map((_, idx) => (
-                    <div key={idx} className="rounded-full bg-neutral-800 dark:bg-neutral-200 h-10 w-10">&nbsp;</div>
+                    <div key={idx} className="rounded-full bg-neutral-800 dark:bg-neutral-200 h-10 w-10"></div>
                   ))
               }
             </div>
@@ -144,11 +144,11 @@ export default function Practice() {
           <div className="w-full grid grid-cols-2 sm:flex sm:flex-col sm:justify-start sm:items-center gap-4">
             {
               options.map((opt: number) =>
-                <button key={opt} className="flex flex-row justify-center items-center flex-wrap gap-2 px-4 py-8 sm:py-4 text-6xl rounded border border-black dark:border-white border-solid sm:w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" onClick={() => guess(opt)}>
+                <button key={opt} className="select-none flex flex-row justify-center items-center flex-wrap gap-2 px-4 py-8 sm:py-4 text-6xl rounded border border-black dark:border-white border-solid sm:w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" onClick={() => guess(opt)}>
                   {
                     invert ?
                       Array.from({ length: opt }).map((_, idx) => (
-                        <div key={idx} className="rounded-full bg-neutral-800 dark:bg-neutral-200 h-4 w-4">&nbsp;</div>
+                        <div key={idx} className="rounded-full bg-neutral-800 dark:bg-neutral-200 h-4 w-4 sm:h-8 sm:w-8"></div>
                       )) :
                       opt
                   }
@@ -165,7 +165,7 @@ export default function Practice() {
           <p className="text-4xl">
             Score: <span className="font-bold">{score}</span>
           </p>
-          <button onClick={restart} className="p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
+          <button onClick={restart} className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center">Try Again</button>
         </div>
       }
     </main>
