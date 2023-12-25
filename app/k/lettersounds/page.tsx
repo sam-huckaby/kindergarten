@@ -84,11 +84,13 @@ export default function Practice() {
   };
 
   const randomize = () => {
-    // Generate random index
-    const randomIndex = Math.floor(Math.random() * available.length);
+    // Select random letter
+    let randomLetter = available[Math.floor(Math.random() * available.length)];
 
-    // Select random element
-    const randomLetter = available[randomIndex];
+    // Do not show the same letter twice in a row, because it is confusing
+    while (randomLetter === letter) {
+      randomLetter = available[Math.floor(Math.random() * available.length)];
+    }
 
     // Update the displayed word
     setLetter(randomLetter);
@@ -121,9 +123,9 @@ export default function Practice() {
           <div className="
             w-[50px] h-[50px]
             rounded-full animate-spin
-            border-t-8 border-t-black border-t-solid
-            border-r-8 border-r-black border-r-solid
-            border-b-8 border-b-black border-b-solid
+            border-t-8 border-t-solid border-t-black dark:border-t-neutral-200
+            border-r-8 border-r-solid border-r-black dark:border-r-neutral-200
+            border-b-8 border-b-solid border-b-black dark:border-b-neutral-200
             border-l-8 border-l-transparent border-l-solid
             ">&nbsp;</div>
         </div>
