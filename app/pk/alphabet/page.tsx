@@ -2,12 +2,15 @@
 
 import React, { useState } from "react";
 import localFont from "next/font/local";
+import { Noto_Serif_Hebrew } from 'next/font/google';
+
+const hebrewFont = Noto_Serif_Hebrew({ subsets: ['latin'] });
 
 // Can't decide if this should be moved to a global location
 // TODO: When more assessments are added, move it somewhere better
 const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' });
 
-export type Language = "english" | "greek";
+export type Language = "english" | "greek" | "hebrew";
 
 export type AlphabetData = {
   letters: string[];
@@ -131,6 +134,58 @@ export default function Practice() {
         "\"Own\" or \"Over\"",
       ],
     },
+    hebrew: {
+      letters: [
+        "א",
+        "ב",
+        "ג",
+        "ד",
+        "ה",
+        "ו",
+        "ז",
+        "ח",
+        "ט",
+        "י",
+        "ך כ",
+        "ל",
+        "ם מ",
+        "ן נ",
+        "ס",
+        "ע",
+        "ף פ",
+        "צ צ",
+        "ק",
+        "ר",
+        "שׁ",
+        "שׂ",
+        "ת",
+      ],
+      soundsLike: [
+        "Aleph",
+        "Bet",
+        "Gimel",
+        "Dalet",
+        "Hey",
+        "Vav",
+        "Zayin",
+        "Chet",
+        "Tet",
+        "Yod",
+        "Kaf",
+        "Lamed",
+        "Mem",
+        "Nun (noon)",
+        "Samekh",
+        "Ayin",
+        "Pe",
+        "Tsadi",
+        "Qof",
+        "Resh",
+        "Sin",
+        "Shin",
+        "Tav",
+      ],
+    },
   };
 
   const [language, setLanguage] = useState<Language>('english');
@@ -156,6 +211,13 @@ export default function Practice() {
     setJump("JUMP");
   };
 
+  const jumpToRandom = () => {
+    // Generate random index
+    const randomIndex = Math.floor(Math.random() * alphabets[language].letters.length);
+
+    setPosition(randomIndex);
+  };
+
   return (
     <main className="flex p-16 pt-24 h-full">
       <div className="flex flex-col items-center justify-between grow">
@@ -163,10 +225,11 @@ export default function Practice() {
           <select onChange={(e) => changeLanguage(e.target.value as Language)} className="select-none p-4 mx-4 rounded border border-solid border-black dark:border-white dark:bg-black">
             <option value="english">English</option>
             <option value="greek">Koine Greek</option>
+            <option value="hebrew">Biblical Hebrew</option>
           </select>
         </div>
         <div className="flex flex-col items-center justify-between">
-          <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''}`}>{alphabets[language].letters[position]}</div>
+          <div className={`word text-6xl text-center font-lexend font-bold ${dyslexic ? openDyslexic.className : ''} ${language === 'hebrew' ? hebrewFont.className : ''}`}>{alphabets[language].letters[position]}</div>
           <div className={`word p-4 mt-4 italic text-2xl text-center font-lexend ${dyslexic ? openDyslexic.className : ''}`}>Like {alphabets[language].soundsLike[position]}</div>
           {
             false && <button className="select-none mt-8 text-gray-500 border border-solid border-gray-500 rounded p-2" onClick={() => setDyslexic(!dyslexic)}>Dyslexic mode: {dyslexic ? "on" : "off"}</button>
@@ -180,6 +243,7 @@ export default function Practice() {
               alphabets[language].letters.map((letter) => <option key={letter} value={letter}>{letter}</option>)
             }
           </select>
+          <button className="select-none p-4 mr-4 rounded border border-black dark:border-white border-solid w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" onClick={jumpToRandom}>Random</button>
           <button className="select-none p-4 rounded border border-black dark:border-white border-solid w-full text-center disabled:bg-gray-300/50 disabled:text-gray-500 dark:disabled:bg-gray-800/50 dark:disabled:text-gray-500" disabled={position > alphabets[language].letters.length-2} onClick={nextLetter}>Next</button>
         </div>
       </div>
