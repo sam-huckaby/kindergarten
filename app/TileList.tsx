@@ -5,7 +5,7 @@ import { AssessmentTile, AssessmentTileProps, Grade } from './AssessmentTile';
 
 export const TileList = () => {
   const tiles: AssessmentTileProps[] = [
-    { title: "Alphabet Flashcards (English & Koine Greek)", href: "/pk/alphabet", grade: "PK" },
+    { title: "Alphabet Flashcards", href: "/pk/alphabet", grade: "PK" },
     { title: "High-Frequency Words", href: "/k/heartwords", grade: "K" },
     { title: "Letter Sound Fluency", href: "/k/lettersounds", grade: "K" },
     { title: "Basic Counting", href: "/k/counting", grade: "K" },
