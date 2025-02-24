@@ -1,6 +1,5 @@
 
 export default function About() {
-
   return (
     <main className="flex h-full flex-col items-center justify-start p-4 pt-24">
       <h1 className="text-4xl mb-4">What is HomeThink?</h1>

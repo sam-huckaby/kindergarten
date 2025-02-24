@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { getCookie, setCookie } from "cookies-next";
 import localFont from "next/font/local";
 import { CongratsMessage } from "@common/CongratsMessage";
 
@@ -8,6 +9,7 @@ enum GameState {
   INITIAL = "initial",
   PLAY = "play",
   END = "end",
+  SELECT = "select",
 };
 
 const timeLimit = 60;
@@ -17,9 +19,14 @@ const timeLimit = 60;
 const openDyslexic = localFont({ src: '/OpenDyslexic-Regular.otf' })
 
 export default function Practice() {
+  // Type definitions
+  interface WordSelections {
+    [key: string]: boolean;
+  }
+
   // Maybe store these in a DB at some point
   const words = [
-    "I",
+    "i",
     "can",
     "see",
     "a",
@@ -79,7 +86,18 @@ export default function Practice() {
     "blue",
   ];
 
-  const [available, setAvailable] = useState(words);
+  const cookieValue = getCookie("homethink.heartwords");
+  const savedSelections = cookieValue ? JSON.parse(cookieValue as string) as WordSelections : {};
+
+  const initialSelected = new Set<string>(
+    Object.entries(savedSelections)
+      .filter(([_, selected]) => selected)
+      .map(([word]) => word)
+  );
+
+  const [selectedWords, setSelectedWords] = useState<Set<string>>(initialSelected);
+
+  const [available, setAvailable] = useState(words.filter((word) => savedSelections[word]));
   const [mode, setMode] = useState<GameState>(GameState.INITIAL);
   const [score, setScore] = useState<number>(0);
   const [showTime, setShowTime] = useState(true);
@@ -87,8 +105,19 @@ export default function Practice() {
   const [word, setWord] = useState('');
   const [dyslexic, setDyslexic] = useState(false);
 
+  // Handle checkbox change
+  const handleCheckboxChange = (word: string) => {
+    const newSelectedWords = new Set(selectedWords);
+    if (newSelectedWords.has(word)) {
+      newSelectedWords.delete(word);
+    } else {
+      newSelectedWords.add(word);
+    }
+    setSelectedWords(newSelectedWords);
+  };
+
   useEffect(() => {
-    randomize();
+    randomize(words.filter((word) => savedSelections[word]));
     setMode(GameState.PLAY);
   }, []);
 
@@ -110,45 +139,83 @@ export default function Practice() {
 
   const endGame = () => {
     setMode(GameState.END);
-    setAvailable(words);
+    setAvailable(words.filter((word) => savedSelections[word]));
     setTime(timeLimit);
   };
 
-  const randomize = () => {
-    // Generate random index
-    const randomIndex = Math.floor(Math.random() * available.length);
+  const randomize = (currentAvailable: string[]) => {
+    const newAvailable = [...currentAvailable]; // Create a copy to avoid mutation
+    const randomIndex = Math.floor(Math.random() * newAvailable.length);
+    const randomWord = newAvailable[randomIndex];
 
-    // Select random element
-    const randomWord = available[randomIndex];
-
-    available.splice(randomIndex, 1);
-    // Remove the word from the available pool of words
-    setAvailable(available);
-    // Update the displayed word
+    newAvailable.splice(randomIndex, 1); // Mutate the copy, not the original
+    setAvailable(newAvailable); // Set the new array as state
     setWord(randomWord);
   };
 
   const nextWord = () => {
     setScore(score + 1);
 
-    // If all words have been read end the game
-    if (available.length === 0) {
-      endGame();
-      return;
+    if (available.length === 1) {
+      // If this is the last word, reset and randomize after the state updates
+      const resetWords = words.filter((word) => savedSelections[word]);
+      setAvailable(resetWords);
+      setTimeout(() => randomize(resetWords), 0); // Defer randomization until state is updated
+    } else {
+      // Otherwise, proceed with the current available words
+      randomize(available);
     }
-
-    // Otherwise, set the current word to a new random word
-    randomize();
   };
 
   const restart = async () => {
     setScore(0);
-    randomize();
+    randomize(words.filter((word) => savedSelections[word]));
     setMode(GameState.PLAY);
+  };
+
+  const saveSettings = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const wordMap: WordSelections = {};
+    words.forEach((word) => {
+      wordMap[word] = selectedWords.has(word);
+    });
+
+    setCookie('homethink.heartwords', JSON.stringify(wordMap), {
+      maxAge: 60 * 60 * 24 * 7 // 7 days in seconds
+    });
+    setTime(timeLimit);
+    restart();
   };
 
   return (
     <main className="flex p-16 pt-24 h-full">
+      {
+        mode === GameState.SELECT &&
+        <div className="flex flex-col w-full">
+          Configure Words:
+          <form className="flex flex-col w-full h-full" onSubmit={saveSettings}>
+            <div className="w-full h-full flex flex-col flex-wrap">
+              {
+                words.sort().map((word) => {
+                  return <span key={word}>
+                    <input
+                      id={word}
+                      name={word}
+                      type="checkbox"
+                      value={word}
+                      checked={selectedWords.has(word)}
+                      onChange={() => handleCheckboxChange(word)}
+                    />
+                    <label className="pl-2" htmlFor={word}>{word}</label>
+                  </span>
+                })
+              }
+            </div>
+            <button className="border border-solid border-gray-300" type="submit">Save & Restart</button>
+          </form>
+        </div>
+      }
       {
         mode === GameState.INITIAL &&
         <div className="flex flex-row justify-center items-center grow">
@@ -164,7 +231,8 @@ export default function Practice() {
       }
       {
         mode === GameState.PLAY &&
-        <div className="flex flex-col items-center justify-between grow">
+        <div className="relative flex flex-col items-center justify-between grow">
+          <button className="absolute top-1 right-1" onClick={() => setMode(GameState.SELECT)}><i className="bi-gear-fill text-3xl"></i></button>
           <div className="timer-container flex flex-col items-center justify-center">
             {showTime && <div className="timer text-xl text-center font-bold font-mono">{time}</div>}
             <div className="select-none mt-4 text-gray-500 cursor-pointer border border-solid border-gray-500 rounded p-2" onClick={() => setShowTime(!showTime)}  >
